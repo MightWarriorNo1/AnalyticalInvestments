@@ -41,7 +41,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <TooltipProvider>
-          <div className="min-h-screen flex flex-col">
+          <div className="min-h-screen flex flex-col dark bg-background text-foreground">
             <Navbar />
             <main className="flex-1">
               <Router />

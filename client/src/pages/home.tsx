@@ -25,19 +25,19 @@ export default function Home() {
   const { user } = useAuth();
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background text-foreground">
       {/* Hero Section */}
-      <section className="relative gradient-hero pt-16 pb-20">
+      <section className="relative gradient-hero pt-16 pb-20 bg-gradient-to-br from-gray-900 to-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
               <div className="space-y-4">
-                <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 leading-tight">
+                <h1 className="text-4xl lg:text-6xl font-bold text-white leading-tight">
                   AI-Enhanced{" "}
                   <span className="text-primary">Investing Tools</span>{" "}
                   For Everyone
                 </h1>
-                <p className="text-xl text-gray-600 leading-relaxed">
+                <p className="text-xl text-gray-300 leading-relaxed">
                   Professional-grade market intelligence made accessible and affordable. 
                   Powered by OMEGA AI with insights from 50+ financial sources.
                 </p>
@@ -56,18 +56,18 @@ export default function Home() {
                     </Button>
                   </Link>
                 )}
-                <Button variant="outline" size="lg" className="text-lg px-8 py-4">
+                <Button variant="outline" size="lg" className="text-lg px-8 py-4 text-white border-white hover:bg-white/10">
                   <Play className="w-5 h-5 mr-2" />
                   Watch Demo
                 </Button>
               </div>
-              <div className="flex items-center space-x-8 text-sm text-gray-600">
+              <div className="flex items-center space-x-8 text-sm text-gray-300">
                 <div className="flex items-center space-x-2">
-                  <CheckCircle className="w-5 h-5 text-green-600" />
+                  <CheckCircle className="w-5 h-5 text-green-400" />
                   <span>No credit card required</span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <CheckCircle className="w-5 h-5 text-green-600" />
+                  <CheckCircle className="w-5 h-5 text-green-400" />
                   <span>Free education hub</span>
                 </div>
               </div>
@@ -75,7 +75,7 @@ export default function Home() {
             
             {/* Dashboard Preview */}
             <div className="relative">
-              <Card className="gradient-card shadow-2xl">
+              <Card className="bg-gray-800/50 backdrop-blur-sm border-gray-700 shadow-2xl">
                 <CardContent className="p-6 space-y-6">
                   {/* Chart visualization */}
                   <div className="h-64 chart-container">
@@ -83,17 +83,17 @@ export default function Home() {
                   </div>
                   {/* Stats cards */}
                   <div className="grid grid-cols-3 gap-4">
-                    <div className="bg-green-50 p-4 rounded-lg text-center">
-                      <div className="text-2xl font-bold text-green-600">+12.5%</div>
-                      <div className="text-sm text-gray-600">Portfolio</div>
+                    <div className="bg-green-900/30 p-4 rounded-lg text-center">
+                      <div className="text-2xl font-bold text-green-400">+12.5%</div>
+                      <div className="text-sm text-gray-300">Portfolio</div>
                     </div>
-                    <div className="bg-amber-50 p-4 rounded-lg text-center">
-                      <div className="text-2xl font-bold text-amber-600">$24.8K</div>
-                      <div className="text-sm text-gray-600">Value</div>
+                    <div className="bg-amber-900/30 p-4 rounded-lg text-center">
+                      <div className="text-2xl font-bold text-amber-400">$24.8K</div>
+                      <div className="text-sm text-gray-300">Value</div>
                     </div>
-                    <div className="bg-blue-50 p-4 rounded-lg text-center">
-                      <div className="text-2xl font-bold text-blue-600">15</div>
-                      <div className="text-sm text-gray-600">Holdings</div>
+                    <div className="bg-blue-900/30 p-4 rounded-lg text-center">
+                      <div className="text-2xl font-bold text-blue-400">15</div>
+                      <div className="text-sm text-gray-300">Holdings</div>
                     </div>
                   </div>
                 </CardContent>
@@ -104,13 +104,13 @@ export default function Home() {
       </section>
 
       {/* Problems & Solutions Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900">
+            <h2 className="text-3xl lg:text-4xl font-bold text-white">
               Solving Real Problems in Financial Technology
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Traditional platforms are complex, expensive, and hard to use. We're changing that.
             </p>
           </div>
@@ -124,11 +124,11 @@ export default function Home() {
               { icon: HelpCircle, title: "Untrustworthy", desc: "Unclear or inaccurate information" }
             ].map((problem, index) => (
               <div key={index} className="text-center space-y-4">
-                <div className="w-16 h-16 bg-red-100 rounded-xl flex items-center justify-center mx-auto">
-                  <problem.icon className="w-8 h-8 text-red-600" />
+                <div className="w-16 h-16 bg-red-900/30 rounded-xl flex items-center justify-center mx-auto">
+                  <problem.icon className="w-8 h-8 text-red-400" />
                 </div>
-                <h3 className="font-semibold text-gray-900">{problem.title}</h3>
-                <p className="text-sm text-gray-600">{problem.desc}</p>
+                <h3 className="font-semibold text-white">{problem.title}</h3>
+                <p className="text-sm text-gray-300">{problem.desc}</p>
               </div>
             ))}
           </div>
@@ -140,7 +140,7 @@ export default function Home() {
                 icon: Brain,
                 title: "Clear Intelligence",
                 desc: "Easy-to-understand market insights powered by AI that cuts through complexity.",
-                gradient: "from-blue-50 to-indigo-50",
+                gradient: "from-blue-900/30 to-indigo-900/30",
                 iconBg: "bg-primary",
                 features: ["Simplified reports", "Visual data summaries"]
               },
@@ -148,7 +148,7 @@ export default function Home() {
                 icon: Wallet,
                 title: "Affordable Access",
                 desc: "Professional-grade tools at just $5/month - a fraction of traditional platform costs.",
-                gradient: "from-green-50 to-emerald-50",
+                gradient: "from-green-900/30 to-emerald-900/30",
                 iconBg: "bg-green-600",
                 features: ["No hidden fees", "Cancel anytime"]
               },
@@ -156,22 +156,22 @@ export default function Home() {
                 icon: Scale3d,
                 title: "Beginner Friendly",
                 desc: "Professional depth with beginner-friendly simplicity and comprehensive education.",
-                gradient: "from-amber-50 to-orange-50",
+                gradient: "from-amber-900/30 to-orange-900/30",
                 iconBg: "bg-amber-600",
                 features: ["Free education hub", "Guided onboarding"]
               }
             ].map((solution, index) => (
-              <Card key={index} className={`bg-gradient-to-br ${solution.gradient} border-0`}>
+              <Card key={index} className={`bg-gradient-to-br ${solution.gradient} border-gray-700`}>
                 <CardContent className="p-8">
                   <div className={`w-12 h-12 ${solution.iconBg} text-white rounded-xl flex items-center justify-center mb-6`}>
                     <solution.icon className="w-6 h-6" />
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">{solution.title}</h3>
-                  <p className="text-gray-600 mb-6">{solution.desc}</p>
+                  <h3 className="text-xl font-semibold text-white mb-4">{solution.title}</h3>
+                  <p className="text-gray-300 mb-6">{solution.desc}</p>
                   <div className="space-y-2">
                     {solution.features.map((feature, idx) => (
-                      <div key={idx} className="flex items-center space-x-2 text-sm text-gray-600">
-                        <CheckCircle className="w-4 h-4 text-green-600" />
+                      <div key={idx} className="flex items-center space-x-2 text-sm text-gray-300">
+                        <CheckCircle className="w-4 h-4 text-green-400" />
                         <span>{feature}</span>
                       </div>
                     ))}
@@ -184,13 +184,13 @@ export default function Home() {
       </section>
 
       {/* Features Preview */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+      <section className="py-20 bg-gradient-to-br from-gray-900 to-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900">
+            <h2 className="text-3xl lg:text-4xl font-bold text-white">
               Professional Tools, Simplified Experience
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Everything you need to make informed investment decisions in one intuitive platform.
             </p>
           </div>
@@ -216,12 +216,12 @@ export default function Home() {
                   }
                 ].map((feature, index) => (
                   <div key={index} className="flex items-start space-x-4">
-                    <div className="w-12 h-12 bg-primary/10 text-primary rounded-xl flex items-center justify-center mt-1">
+                    <div className="w-12 h-12 bg-primary/20 text-primary rounded-xl flex items-center justify-center mt-1">
                       <feature.icon className="w-6 h-6" />
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2">{feature.title}</h3>
-                      <p className="text-gray-600">{feature.desc}</p>
+                      <h3 className="text-lg font-semibold text-white mb-2">{feature.title}</h3>
+                      <p className="text-gray-300">{feature.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -235,53 +235,17 @@ export default function Home() {
             </div>
 
             {/* Dashboard Preview */}
-            <Card className="shadow-2xl">
+            <Card className="bg-gray-800/50 backdrop-blur-sm border-gray-700 shadow-2xl">
               <CardContent className="p-8 space-y-8">
                 {/* Top Stats */}
                 <div className="grid grid-cols-2 gap-6">
-                  <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-6 rounded-xl">
+                  <div className="bg-gradient-to-r from-green-900/30 to-emerald-900/30 p-6 rounded-xl">
                     <div className="flex items-center justify-between mb-2">
-                      <h3 className="text-sm font-medium text-gray-600">Portfolio Value</h3>
-                      <TrendingUp className="w-5 h-5 text-green-600" />
+                      <h3 className="text-sm font-medium text-gray-300">Portfolio Value</h3>
+                      <TrendingUp className="w-5 h-5 text-green-400" />
                     </div>
-                    <div className="text-2xl font-bold text-gray-900">$47,832</div>
-                    <div className="text-sm text-green-600">+12.5% this month</div>
-                  </div>
-                  
-                  <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-xl">
-                    <div className="flex items-center justify-between mb-2">
-                      <h3 className="text-sm font-medium text-gray-600">Daily P&L</h3>
-                      <BarChart3 className="w-5 h-5 text-blue-600" />
-                    </div>
-                    <div className="text-2xl font-bold text-gray-900">+$1,247</div>
-                    <div className="text-sm text-blue-600">+2.1% today</div>
-                  </div>
-                </div>
-
-                {/* Chart */}
-                <div className="space-y-4">
-                  <h3 className="text-lg font-semibold text-gray-900">Portfolio Performance</h3>
-                  <div className="h-48 chart-container">
-                    <AllocationChart />
-                  </div>
-                </div>
-
-                {/* AI Insights */}
-                <div className="bg-gradient-to-r from-primary/5 to-blue-50 p-6 rounded-xl">
-                  <div className="flex items-start space-x-4">
-                    <div className="w-10 h-10 bg-primary text-white rounded-lg flex items-center justify-center">
-                      <Brain className="w-5 h-5" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-gray-900 mb-2">OMEGA AI Insights</h3>
-                      <p className="text-gray-600 text-sm mb-3">
-                        Based on current market conditions, consider increasing tech exposure. 
-                        Market sentiment shows bullish indicators for Q4.
-                      </p>
-                      <Button variant="link" className="text-primary p-0 h-auto">
-                        View Full Analysis <ArrowRight className="w-4 h-4 ml-1" />
-                      </Button>
-                    </div>
+                    <div className="text-2xl font-bold text-white">$47,832</div>
+                    <div className="text-sm text-green-400">+12.5% this month</div>
                   </div>
                 </div>
               </CardContent>
@@ -291,14 +255,14 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-primary">
+      <section className="py-20 bg-gradient-to-br from-gray-900 to-gray-800 border-t border-gray-800">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="space-y-8">
             <div className="space-y-4">
               <h2 className="text-3xl lg:text-4xl font-bold text-white">
                 Ready to Transform Your Investment Strategy?
               </h2>
-              <p className="text-xl text-blue-100">
+              <p className="text-xl text-gray-300">
                 Join thousands of investors using OMEGA AI to make smarter financial decisions.
               </p>
             </div>
@@ -307,13 +271,13 @@ export default function Home() {
               {user ? (
                 <>
                   <Link href="/dashboard">
-                    <Button size="lg" variant="secondary" className="text-lg px-8 py-4">
+                    <Button size="lg" variant="secondary" className="text-lg px-8 py-4 bg-gray-800 text-white hover:bg-gray-700 border-gray-700">
                       Go to Dashboard
                     </Button>
                   </Link>
                   {user.plan === "free" && (
                     <Link href="/pricing">
-                      <Button size="lg" variant="outline" className="text-lg px-8 py-4 bg-white/10 border-white/20 text-white hover:bg-white/20">
+                      <Button size="lg" variant="outline" className="text-lg px-8 py-4 bg-gray-800/50 border-gray-700 text-white hover:bg-gray-800">
                         Upgrade to OMEGA
                       </Button>
                     </Link>
@@ -322,12 +286,12 @@ export default function Home() {
               ) : (
                 <>
                   <Link href="/register">
-                    <Button size="lg" variant="secondary" className="text-lg px-8 py-4">
+                    <Button size="lg" variant="secondary" className="text-lg px-8 py-4 bg-gray-800 text-white hover:bg-gray-700 border-gray-700">
                       Start Free Trial
                     </Button>
                   </Link>
                   <Link href="/pricing">
-                    <Button size="lg" variant="outline" className="text-lg px-8 py-4 bg-white/10 border-white/20 text-white hover:bg-white/20">
+                    <Button size="lg" variant="outline" className="text-lg px-8 py-4 bg-gray-800/50 border-gray-700 text-white hover:bg-gray-800">
                       View Pricing
                     </Button>
                   </Link>
@@ -335,7 +299,7 @@ export default function Home() {
               )}
             </div>
 
-            <div className="flex justify-center space-x-8 text-blue-100 text-sm">
+            <div className="flex justify-center space-x-8 text-gray-400 text-sm">
               <span>✓ 30-day money-back guarantee</span>
               <span>✓ Cancel anytime</span>
               <span>✓ No setup fees</span>
