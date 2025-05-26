@@ -22,11 +22,10 @@ import {
   Zap
 } from "lucide-react";
 
-// Load Stripe
-if (!import.meta.env.VITE_STRIPE_PUBLIC_KEY) {
-  throw new Error('Missing required Stripe key: VITE_STRIPE_PUBLIC_KEY');
-}
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
+// Load Stripe (only if key is available)
+const stripePromise = import.meta.env.VITE_STRIPE_PUBLIC_KEY 
+  ? loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY)
+  : null;
 
 const SubscribeForm = () => {
   const stripe = useStripe();
@@ -323,7 +322,27 @@ export default function Subscribe() {
               </div>
             </CardHeader>
             <CardContent>
-              {clientSecret ? (
+              {!stripePromise ? (
+                <div className="text-center space-y-4 p-8">
+                  <AlertCircle className="w-12 h-12 text-amber-500 mx-auto" />
+                  <h3 className="text-lg font-semibold text-gray-900">Payment Setup Required</h3>
+                  <p className="text-gray-600">
+                    Payment processing will be available once the platform is fully configured with payment credentials.
+                  </p>
+                  <div className="bg-blue-50 border border-blue-200 p-4 rounded-lg text-left">
+                    <h4 className="font-medium text-blue-900 mb-2">Meanwhile, explore these features:</h4>
+                    <ul className="text-blue-700 text-sm space-y-1">
+                      <li>• Free educational content in the Education Hub</li>
+                      <li>• Portfolio tracking and visualization tools</li>
+                      <li>• Market data and basic analytics</li>
+                      <li>• User dashboard and account management</li>
+                    </ul>
+                  </div>
+                  <Link href="/dashboard">
+                    <Button className="w-full mt-4">Explore Free Features</Button>
+                  </Link>
+                </div>
+              ) : clientSecret ? (
                 <Elements stripe={stripePromise} options={{ clientSecret }}>
                   <SubscribeForm />
                 </Elements>

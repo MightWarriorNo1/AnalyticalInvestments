@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
-import { Chart, ArcElement, Tooltip, Legend } from "chart.js";
+import { Chart, ArcElement, DoughnutController, Tooltip, Legend } from "chart.js";
 
-Chart.register(ArcElement, Tooltip, Legend);
+Chart.register(ArcElement, DoughnutController, Tooltip, Legend);
 
 export default function AllocationChart() {
   const chartRef = useRef<HTMLCanvasElement>(null);

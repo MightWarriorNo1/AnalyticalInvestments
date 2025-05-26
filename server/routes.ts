@@ -129,49 +129,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Stripe subscription routes
   app.post('/api/get-or-create-subscription', requireAuth, async (req, res) => {
-    if (!stripe) {
-      return res.status(503).json({ 
-        message: "Payment processing unavailable. Please contact support." 
-      });
-    }
-
-    try {
-      let user = req.user as any;
-
-      if (user.stripeSubscriptionId) {
-        const subscription = await stripe.subscriptions.retrieve(user.stripeSubscriptionId);
-        res.json({
-          subscriptionId: subscription.id,
-          clientSecret: (subscription.latest_invoice as any)?.payment_intent?.client_secret,
-        });
-        return;
-      }
-
-      const customer = await stripe.customers.create({
-        email: user.email,
-        name: user.username,
-      });
-
-      // For now, create a basic subscription structure
-      // This will be replaced with proper Stripe integration once API keys are added
-      const subscription = {
-        id: 'temp_sub_' + Date.now(),
-        latest_invoice: {
-          payment_intent: {
-            client_secret: 'temp_secret_' + Date.now()
-          }
-        }
-      };
-
-      await storage.updateUserStripeInfo(user.id, customer.id, subscription.id);
-      
-      res.json({
-        subscriptionId: subscription.id,
-        clientSecret: (subscription.latest_invoice as any)?.payment_intent?.client_secret,
-      });
-    } catch (error: any) {
-      res.status(400).json({ error: { message: error.message } });
-    }
+    return res.status(503).json({ 
+      message: "Payment processing will be available once API keys are configured." 
+    });
   });
 
   app.post('/api/update-subscription-status', requireAuth, async (req, res) => {
