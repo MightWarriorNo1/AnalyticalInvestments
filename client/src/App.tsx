@@ -15,6 +15,7 @@ import Subscribe from "@/pages/subscribe";
 import Login from "@/pages/login";
 import Register from "@/pages/register";
 import Admin from "@/pages/admin";
+import Chat from "@/pages/chat";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -24,6 +25,7 @@ function Router() {
       <Route path="/about" component={About} />
       <Route path="/education" component={Education} />
       <Route path="/dashboard" component={Dashboard} />
+      <Route path="/chat" component={Chat} />
       <Route path="/pricing" component={Pricing} />
       <Route path="/subscribe" component={Subscribe} />
       <Route path="/login" component={Login} />
