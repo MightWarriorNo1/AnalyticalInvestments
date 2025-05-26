@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 20 14.3% 4.1%;
+  --muted: 60 4.8% 95.9%;
+  --muted-foreground: 25 5.3% 44.7%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 20 14.3% 4.1%;
+  --card: 0 0% 100%;
+  --card-foreground: 20 14.3% 4.1%;
+  --border: 20 5.9% 90%;
+  --input: 20 5.9% 90%;
+  --primary: 207 90% 54%; /* #1E40AF - Professional blue */
+  --primary-foreground: 211 100% 99%;
+  --secondary: 159 84% 39%; /* #059669 - Success green */
+  --secondary-foreground: 210 40% 98%;
+  --accent: 43 96% 56%; /* #F59E0B - Warning amber */
+  --accent-foreground: 26 83% 14%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 60 9.1% 97.8%;
+  --ring: 20 14.3% 4.1%;
+  --radius: 0.5rem;
+  
+  /* Custom financial theme colors */
+  --neutral-50: 210 11% 98%; /* #F8FAFC */
+  --neutral-100: 210 11% 96%; /* #F1F5F9 */
+  --neutral-500: 215 16% 47%; /* #64748B */
+  --neutral-800: 222 84% 5%; /* #1E293B */
+  
+  --chart-1: 207 90% 54%; /* Primary blue */
+  --chart-2: 159 84% 39%; /* Secondary green */
+  --chart-3: 43 96% 56%; /* Accent amber */
+  --chart-4: 262 83% 58%; /* Purple */
+  --chart-5: 346 77% 49%; /* Rose */
+}
+
+.dark {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --primary: 207 90% 54%;
+  --primary-foreground: 211 100% 99%;
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 98%;
+  --accent: 240 3.7% 15.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 240 4.9% 83.9%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-xl font-semibold transition-colors shadow-lg;
+  }
+
+  .btn-secondary {
+    @apply border border-border text-foreground hover:bg-muted px-6 py-3 rounded-xl font-semibold transition-colors;
+  }
+
+  .gradient-hero {
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.05) 0%, hsl(var(--accent) / 0.05) 100%);
+  }
+
+  .gradient-card {
+    background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--muted) / 0.3) 100%);
+  }
+
+  .chart-container {
+    @apply bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20 rounded-xl p-4;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .bg-financial-gradient {
+    background: linear-gradient(135deg, #1E40AF 0%, #059669 50%, #F59E0B 100%);
+  }
+}
