@@ -1,131 +1,21 @@
-import { useEffect, useRef } from "react";
-import { 
-  Chart, 
-  CategoryScale, 
-  LinearScale, 
-  PointElement, 
-  LineElement, 
-  LineController,
-  Title, 
-  Tooltip, 
-  Legend, 
-  Filler 
-} from "chart.js";
-
-Chart.register(
-  CategoryScale, 
-  LinearScale, 
-  PointElement, 
-  LineElement, 
-  LineController,
-  Title, 
-  Tooltip, 
-  Legend, 
-  Filler
-);
-
 export default function PortfolioChart() {
-  const chartRef = useRef<HTMLCanvasElement>(null);
-  const chartInstanceRef = useRef<Chart | null>(null);
-
-  useEffect(() => {
-    if (!chartRef.current) return;
-
-    // Destroy existing chart instance
-    if (chartInstanceRef.current) {
-      chartInstanceRef.current.destroy();
-    }
-
-    const ctx = chartRef.current.getContext("2d");
-    if (!ctx) return;
-
-    chartInstanceRef.current = new Chart(ctx, {
-      type: "line",
-      data: {
-        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-        datasets: [
-          {
-            label: "Portfolio Value",
-            data: [42000, 43500, 42800, 45200, 46800, 47832],
-            borderColor: "hsl(207, 90%, 54%)",
-            backgroundColor: "hsla(207, 90%, 54%, 0.1)",
-            fill: true,
-            tension: 0.4,
-            pointBackgroundColor: "hsl(207, 90%, 54%)",
-            pointBorderColor: "#fff",
-            pointBorderWidth: 2,
-            pointRadius: 4,
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false,
-          },
-          tooltip: {
-            backgroundColor: "rgba(0, 0, 0, 0.8)",
-            titleColor: "#fff",
-            bodyColor: "#fff",
-            borderColor: "hsl(207, 90%, 54%)",
-            borderWidth: 1,
-            cornerRadius: 8,
-            displayColors: false,
-            callbacks: {
-              label: function(context) {
-                return `$${context.parsed.y.toLocaleString()}`;
-              }
-            }
-          },
-        },
-        scales: {
-          x: {
-            grid: {
-              display: false,
-            },
-            border: {
-              display: false,
-            },
-            ticks: {
-              color: "#6B7280",
-              font: {
-                size: 12,
-              },
-            },
-          },
-          y: {
-            grid: {
-              color: "rgba(0, 0, 0, 0.05)",
-            },
-            border: {
-              display: false,
-            },
-            ticks: {
-              color: "#6B7280",
-              font: {
-                size: 12,
-              },
-              callback: function(value) {
-                return `$${(Number(value) / 1000).toFixed(0)}K`;
-              },
-            },
-          },
-        },
-        interaction: {
-          intersect: false,
-          mode: "index",
-        },
-      },
-    });
-
-    return () => {
-      if (chartInstanceRef.current) {
-        chartInstanceRef.current.destroy();
-      }
-    };
-  }, []);
-
-  return <canvas ref={chartRef} className="w-full h-full" />;
+  return (
+    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 rounded-lg">
+      <div className="text-center space-y-3">
+        <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto">
+          <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 12l3-3 3 3 4-4" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+          </svg>
+        </div>
+        <div>
+          <h3 className="font-semibold text-gray-900">Portfolio Performance</h3>
+          <p className="text-sm text-gray-600">Advanced charts available with full platform setup</p>
+          <div className="mt-3 text-xs text-gray-500">
+            Current Value: <span className="font-medium text-green-600">$47,832</span> (+12.8%)
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
