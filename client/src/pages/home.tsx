@@ -16,88 +16,134 @@ import {
   ArrowRight,
   BarChart3,
   MessageSquare,
-  Database
+  Database,
+  Shield,
+  Check,
+  X,
+  Star,
+  Clock,
+  Users
 } from "lucide-react";
 import PortfolioChart from "@/components/charts/portfolio-chart";
 import AllocationChart from "@/components/charts/allocation-chart";
 
+interface Feature {
+  name: string;
+  included: boolean;
+  note?: string;
+}
+
 export default function Home() {
   const { user } = useAuth();
+
+  const scrollToDemo = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const demoSection = document.getElementById('demo-section');
+    if (demoSection) {
+      demoSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Hero Section */}
-      <section className="relative gradient-hero pt-16 pb-20 bg-gradient-to-br from-gray-900 to-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <section className="relative pt-32 pb-20 overflow-hidden">
+        <div className="absolute inset-0 gradient-hero opacity-50" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
-              <div className="space-y-4">
-                <h1 className="text-4xl lg:text-6xl font-bold text-white leading-tight">
-                  AI-Enhanced{" "}
-                  <span className="text-primary">Investing Tools</span>{" "}
-                  For Everyone
-                </h1>
-                <p className="text-xl text-gray-300 leading-relaxed">
-                  Professional-grade market intelligence made accessible and affordable. 
-                  Powered by OMEGA AI with insights from 50+ financial sources.
-                </p>
-              </div>
+              <h1 className="text-5xl font-bold leading-tight">
+                Transform Your Investment Strategy with{' '}
+                <span className="bg-gradient-to-r from-purple-600 to-red-600 bg-clip-text text-transparent">
+                  Data-Driven Insights
+                </span>
+              </h1>
+              <p className="text-xl text-muted-foreground">
+                Unlock the power of advanced analytics and make informed investment decisions with our cutting-edge platform.
+              </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                {user ? (
-                  <Link href="/dashboard">
-                    <Button size="lg" className="btn-primary text-lg px-8 py-4">
-                      Go to Dashboard
-                    </Button>
-                  </Link>
-                ) : (
-                  <Link href="/register">
-                    <Button size="lg" className="btn-primary text-lg px-8 py-4">
-                      Start Free Trial
-                    </Button>
-                  </Link>
-                )}
-                <Button variant="outline" size="lg" className="text-lg px-8 py-4 text-white border-white hover:bg-white/10">
-                  <Play className="w-5 h-5 mr-2" />
+                <Link to="/signup" className="btn-primary">
+                  Get Started
+                  <ArrowRight className="ml-2 inline-block" size={20} />
+                </Link>
+                <button onClick={scrollToDemo} className="btn-secondary">
                   Watch Demo
-                </Button>
+                </button>
               </div>
-              <div className="flex items-center space-x-8 text-sm text-gray-300">
-                <div className="flex items-center space-x-2">
-                  <CheckCircle className="w-5 h-5 text-green-400" />
-                  <span>No credit card required</span>
+            </div>
+            <div className="relative">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-4">
+                  <img
+                    src="/images/1.jpg"
+                    alt="Analytics Dashboard"
+                    className="rounded-xl shadow-2xl border border-purple-500/20"
+                  />
+                  <img
+                    src="/images/2.jpg"
+                    alt="Market Analysis"
+                    className="rounded-xl shadow-2xl border border-purple-500/20"
+                  />
                 </div>
-                <div className="flex items-center space-x-2">
-                  <CheckCircle className="w-5 h-5 text-green-400" />
-                  <span>Free education hub</span>
+                <div className="space-y-4 pt-8">
+                  <img
+                    src="/images/3.jpg"
+                    alt="Portfolio Insights"
+                    className="rounded-xl shadow-2xl border border-purple-500/20"
+                  />
+                  <img
+                    src="/images/4.jpg"
+                    alt="Risk Assessment"
+                    className="rounded-xl shadow-2xl border border-purple-500/20"
+                  />
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Industry Pain Points Section */}
+      <section className="py-20 bg-gradient-to-b from-background to-background/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold mb-4">
+              Solving Modern Investment Challenges
+            </h2>
+            <p className="text-xl text-muted-foreground">
+              We address the key pain points that investors face in today's complex market
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="gradient-card p-6 rounded-xl border border-purple-500/20">
+              <div className="bg-purple-500/10 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                <BarChart3 className="text-purple-500" size={24} />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Data Overload</h3>
+              <p className="text-muted-foreground">
+                Struggling to make sense of overwhelming market data? Our AI-powered analytics transform complex information into actionable insights.
+              </p>
+            </div>
             
-            {/* Dashboard Preview */}
-            <div className="relative">
-              <Card className="bg-gray-800/50 backdrop-blur-sm border-gray-700 shadow-2xl">
-                <CardContent className="p-6 space-y-6">
-                  {/* Chart visualization */}
-                  <div className="h-64 chart-container">
-                    <PortfolioChart />
-                  </div>
-                  {/* Stats cards */}
-                  <div className="grid grid-cols-3 gap-4">
-                    <div className="bg-green-900/30 p-4 rounded-lg text-center">
-                      <div className="text-2xl font-bold text-green-400">+12.5%</div>
-                      <div className="text-sm text-gray-300">Portfolio</div>
-                    </div>
-                    <div className="bg-amber-900/30 p-4 rounded-lg text-center">
-                      <div className="text-2xl font-bold text-amber-400">$24.8K</div>
-                      <div className="text-sm text-gray-300">Value</div>
-                    </div>
-                    <div className="bg-blue-900/30 p-4 rounded-lg text-center">
-                      <div className="text-2xl font-bold text-blue-400">15</div>
-                      <div className="text-sm text-gray-300">Holdings</div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+            <div className="gradient-card p-6 rounded-xl border border-purple-500/20">
+              <div className="bg-red-500/10 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                <Shield className="text-red-500" size={24} />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Risk Management</h3>
+              <p className="text-muted-foreground">
+                Worried about market volatility? Our advanced risk assessment tools help you protect your investments and make informed decisions.
+              </p>
+            </div>
+            
+            <div className="gradient-card p-6 rounded-xl border border-purple-500/20">
+              <div className="bg-purple-500/10 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                <TrendingUp className="text-purple-500" size={24} />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Performance Tracking</h3>
+              <p className="text-muted-foreground">
+                Need better portfolio insights? Get real-time performance metrics and personalized recommendations to optimize your returns.
+              </p>
             </div>
           </div>
         </div>
@@ -183,15 +229,15 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Features Preview */}
-      <section className="py-20 bg-gradient-to-br from-gray-900 to-gray-800">
+      {/* Demo Section */}
+      <section id="demo-section" className="py-20 bg-gradient-to-br from-gray-900 to-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-white">
-              Professional Tools, Simplified Experience
+              See OMEGA AI in Action
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Everything you need to make informed investment decisions in one intuitive platform.
+              Watch how our platform transforms complex market data into actionable insights.
             </p>
           </div>
 
@@ -200,19 +246,19 @@ export default function Home() {
               <div className="space-y-6">
                 {[
                   {
+                    icon: Play,
+                    title: "Interactive Demo",
+                    desc: "Experience our platform's powerful features through an interactive walkthrough."
+                  },
+                  {
                     icon: BarChart3,
-                    title: "Real-Time Analytics",
-                    desc: "Live market data and portfolio tracking with professional-grade charts and indicators."
+                    title: "Real-Time Analysis",
+                    desc: "See how OMEGA AI processes market data and generates insights in real-time."
                   },
                   {
                     icon: MessageSquare,
-                    title: "OMEGA AI Assistant",
-                    desc: "Get personalized insights and answers to your financial questions from our advanced AI."
-                  },
-                  {
-                    icon: Database,
-                    title: "50+ Data Sources",
-                    desc: "Comprehensive market intelligence from trusted financial news and data providers."
+                    title: "AI Assistant Demo",
+                    desc: "Watch our AI assistant answer complex financial questions and provide recommendations."
                   }
                 ].map((feature, index) => (
                   <div key={index} className="flex items-start space-x-4">
@@ -227,26 +273,31 @@ export default function Home() {
                 ))}
               </div>
               
-              <Link href="/dashboard">
+              <Link href="/register">
                 <Button className="btn-primary">
-                  Explore Dashboard <ArrowRight className="w-4 h-4 ml-2" />
+                  Start Free Trial <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </Link>
             </div>
 
-            {/* Dashboard Preview */}
+            {/* Demo Video Preview */}
             <Card className="bg-gray-800/50 backdrop-blur-sm border-gray-700 shadow-2xl">
               <CardContent className="p-8 space-y-8">
-                {/* Top Stats */}
-                <div className="grid grid-cols-2 gap-6">
-                  <div className="bg-gradient-to-r from-green-900/30 to-emerald-900/30 p-6 rounded-xl">
-                    <div className="flex items-center justify-between mb-2">
-                      <h3 className="text-sm font-medium text-gray-300">Portfolio Value</h3>
-                      <TrendingUp className="w-5 h-5 text-green-400" />
-                    </div>
-                    <div className="text-2xl font-bold text-white">$47,832</div>
-                    <div className="text-sm text-green-400">+12.5% this month</div>
+                <div className="aspect-video bg-gray-900 rounded-lg overflow-hidden relative">
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <Button size="lg" className="w-16 h-16 rounded-full bg-primary/90 hover:bg-primary">
+                      <Play className="w-8 h-8" />
+                    </Button>
                   </div>
+                  <img 
+                    src="/images/demo-preview.jpg" 
+                    alt="Demo Preview" 
+                    className="w-full h-full object-cover opacity-50"
+                  />
+                </div>
+                <div className="text-center space-y-2">
+                  <h3 className="text-xl font-semibold text-white">Platform Overview</h3>
+                  <p className="text-gray-300">Watch how OMEGA AI transforms your investment strategy</p>
                 </div>
               </CardContent>
             </Card>
@@ -254,55 +305,170 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* Pricing Section */}
       <section className="py-20 bg-gradient-to-br from-gray-900 to-gray-800 border-t border-gray-800">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="space-y-8">
-            <div className="space-y-4">
-              <h2 className="text-3xl lg:text-4xl font-bold text-white">
-                Ready to Transform Your Investment Strategy?
-              </h2>
-              <p className="text-xl text-gray-300">
-                Join thousands of investors using OMEGA AI to make smarter financial decisions.
-              </p>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center space-y-6">
+            <h2 className="text-4xl lg:text-6xl font-bold text-white">
+              Simple, Transparent Pricing
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              Choose the plan that fits your needs. Upgrade or downgrade at any time with no hidden fees.
+            </p>
+            <div className="flex justify-center space-x-8 text-gray-400">
+              <div className="flex items-center space-x-2">
+                <Shield className="w-5 h-5 text-green-400" />
+                <span>30-day money-back guarantee</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Clock className="w-5 h-5 text-green-400" />
+                <span>Cancel anytime</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <TrendingUp className="w-5 h-5 text-green-400" />
+                <span>No setup fees</span>
+              </div>
             </div>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              {user ? (
-                <>
-                  <Link href="/dashboard">
-                    <Button size="lg" variant="secondary" className="text-lg px-8 py-4 bg-gray-800 text-white hover:bg-gray-700 border-gray-700">
-                      Go to Dashboard
-                    </Button>
-                  </Link>
-                  {user.plan === "free" && (
-                    <Link href="/pricing">
-                      <Button size="lg" variant="outline" className="text-lg px-8 py-4 bg-gray-800/50 border-gray-700 text-white hover:bg-gray-800">
-                        Upgrade to OMEGA
-                      </Button>
-                    </Link>
-                  )}
-                </>
-              ) : (
-                <>
-                  <Link href="/register">
-                    <Button size="lg" variant="secondary" className="text-lg px-8 py-4 bg-gray-800 text-white hover:bg-gray-700 border-gray-700">
-                      Start Free Trial
-                    </Button>
-                  </Link>
-                  <Link href="/pricing">
-                    <Button size="lg" variant="outline" className="text-lg px-8 py-4 bg-gray-800/50 border-gray-700 text-white hover:bg-gray-800">
-                      View Pricing
-                    </Button>
-                  </Link>
-                </>
-              )}
-            </div>
+          </div>
 
-            <div className="flex justify-center space-x-8 text-gray-400 text-sm">
-              <span>✓ 30-day money-back guarantee</span>
-              <span>✓ Cancel anytime</span>
-              <span>✓ No setup fees</span>
+          <div className="grid md:grid-cols-2 gap-8 mt-16">
+            {[
+              {
+                name: "Free Plan",
+                price: "$0",
+                period: "/month",
+                description: "Perfect for getting started with investing education",
+                popular: false,
+                features: [
+                  { name: "Full access to education hub", included: true } as Feature,
+                  { name: "Basic market data", included: true } as Feature,
+                  { name: "Community forum access", included: true } as Feature,
+                  { name: "Limited AI tools access", included: false, note: "5 queries/month" } as Feature,
+                  { name: "Basic reports only", included: false, note: "Monthly summaries" } as Feature,
+                  { name: "No chat sessions", included: false } as Feature,
+                  { name: "Admin dashboard access", included: false } as Feature,
+                  { name: "Priority support", included: false } as Feature,
+                  { name: "Advanced analytics", included: false } as Feature,
+                  { name: "Custom reports", included: false } as Feature
+                ],
+                cta: user ? "Current Plan" : "Get Started Free",
+                ctaVariant: "outline" as const,
+                ctaLink: user ? "/dashboard" : "/register"
+              },
+              {
+                name: "OMEGA Plan",
+                price: "$5",
+                period: "/month",
+                description: "Professional-grade tools at an affordable price",
+                popular: true,
+                features: [
+                  { name: "Full access to OMEGA AI", included: true },
+                  { name: "Unlimited reports & graphs", included: true },
+                  { name: "Unlimited chat sessions", included: true },
+                  { name: "Admin dashboard access", included: true },
+                  { name: "Priority updates & support", included: true },
+                  { name: "Full education suite", included: true },
+                  { name: "Real-time market data", included: true },
+                  { name: "Advanced portfolio analytics", included: true },
+                  { name: "Custom AI reports", included: true },
+                  { name: "API access", included: true }
+                ],
+                cta: user?.plan === "omega" ? "Current Plan" : "Start OMEGA Trial",
+                ctaVariant: "default" as const,
+                ctaLink: user?.plan === "omega" ? "/dashboard" : "/subscribe"
+              }
+            ].map((plan) => (
+              <Card 
+                key={plan.name} 
+                className={`relative ${
+                  plan.popular 
+                    ? "bg-gradient-to-br from-primary/20 to-purple-900/20 backdrop-blur-sm border-primary/50" 
+                    : "bg-gray-800/50 backdrop-blur-sm border-gray-700"
+                } transition-all duration-300 hover:shadow-lg`}
+              >
+                {plan.popular && (
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                    <Badge className="bg-primary text-white px-6 py-2 text-sm font-semibold">
+                      <Star className="w-4 h-4 mr-1" />
+                      Most Popular
+                    </Badge>
+                  </div>
+                )}
+                
+                <CardContent className="p-8">
+                  {/* Header */}
+                  <div className="text-center space-y-4 mb-8">
+                    <h3 className="text-2xl font-bold text-white">{plan.name}</h3>
+                    <div className="flex items-baseline justify-center">
+                      <span className={`text-5xl font-bold ${plan.popular ? "text-primary" : "text-white"}`}>
+                        {plan.price}
+                      </span>
+                      <span className="text-lg text-gray-400 ml-1">{plan.period}</span>
+                    </div>
+                    <p className="text-gray-300 leading-relaxed">{plan.description}</p>
+                  </div>
+
+                  {/* Features */}
+                  <div className="space-y-4 mb-8">
+                    {plan.features.map((feature: Feature, idx) => (
+                      <div key={idx} className="flex items-start space-x-3">
+                        {feature.included ? (
+                          <Check className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
+                        ) : (
+                          <X className="w-5 h-5 text-gray-600 mt-0.5 flex-shrink-0" />
+                        )}
+                        <span className={`text-sm ${feature.included ? "text-gray-300" : "text-gray-500"}`}>
+                          {feature.name}
+                          {feature.note && (
+                            <span className="text-gray-500 ml-2">({feature.note})</span>
+                          )}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* CTA Button */}
+                  <Link href={plan.ctaLink}>
+                    <Button 
+                      className={`w-full py-4 text-lg font-semibold ${
+                        plan.popular 
+                          ? "bg-primary hover:bg-primary/90 text-white shadow-lg" 
+                          : "bg-gray-700 hover:bg-gray-600 text-white"
+                      }`}
+                      variant={plan.ctaVariant}
+                      disabled={user?.plan === plan.name.toLowerCase().split(' ')[0]}
+                    >
+                      {user?.plan === plan.name.toLowerCase().split(' ')[0] ? (
+                        <>
+                          <Check className="w-5 h-5 mr-2" />
+                          Current Plan
+                        </>
+                      ) : (
+                        plan.cta
+                      )}
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          {/* Additional Info */}
+          <div className="text-center mt-16 space-y-6">
+            <h3 className="text-2xl font-bold text-white">Questions about our plans?</h3>
+            <div className="flex flex-wrap justify-center gap-8 text-sm text-gray-400">
+              <div className="flex items-center space-x-2">
+                <Shield className="w-4 h-4 text-green-400" />
+                <span>SSL encrypted & secure</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Users className="w-4 h-4 text-blue-400" />
+                <span>5,000+ satisfied users</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <MessageSquare className="w-4 h-4 text-purple-400" />
+                <span>24/7 customer support</span>
+              </div>
             </div>
           </div>
         </div>
