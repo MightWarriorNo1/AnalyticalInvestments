@@ -1,43 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: 0 0% 100%;
-  --foreground: 20 14.3% 4.1%;
-  --muted: 60 4.8% 95.9%;
-  --muted-foreground: 25 5.3% 44.7%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 20 14.3% 4.1%;
-  --card: 0 0% 100%;
-  --card-foreground: 20 14.3% 4.1%;
-  --border: 20 5.9% 90%;
-  --input: 20 5.9% 90%;
-  --primary: 207 90% 54%; /* #1E40AF - Professional blue */
-  --primary-foreground: 211 100% 99%;
-  --secondary: 159 84% 39%; /* #059669 - Success green */
-  --secondary-foreground: 210 40% 98%;
-  --accent: 43 96% 56%; /* #F59E0B - Warning amber */
-  --accent-foreground: 26 83% 14%;
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 60 9.1% 97.8%;
-  --ring: 20 14.3% 4.1%;
-  --radius: 0.5rem;
-  
-  /* Custom financial theme colors */
-  --neutral-50: 210 11% 98%; /* #F8FAFC */
-  --neutral-100: 210 11% 96%; /* #F1F5F9 */
-  --neutral-500: 215 16% 47%; /* #64748B */
-  --neutral-800: 222 84% 5%; /* #1E293B */
-  
-  --chart-1: 207 90% 54%; /* Primary blue */
-  --chart-2: 159 84% 39%; /* Secondary green */
-  --chart-3: 43 96% 56%; /* Accent amber */
-  --chart-4: 262 83% 58%; /* Purple */
-  --chart-5: 346 77% 49%; /* Rose */
-}
-
-.dark {
   --background: 240 10% 3.9%;
   --foreground: 0 0% 98%;
   --muted: 240 3.7% 15.9%;
@@ -48,15 +15,28 @@
   --card-foreground: 0 0% 98%;
   --border: 240 3.7% 15.9%;
   --input: 240 3.7% 15.9%;
-  --primary: 207 90% 54%;
-  --primary-foreground: 211 100% 99%;
-  --secondary: 240 3.7% 15.9%;
+  --primary: 262 83% 58%; /* Purple */
+  --primary-foreground: 0 0% 98%;
+  --secondary: 346 77% 49%; /* Red */
   --secondary-foreground: 0 0% 98%;
-  --accent: 240 3.7% 15.9%;
+  --accent: 262 83% 58%; /* Purple */
   --accent-foreground: 0 0% 98%;
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 0 0% 98%;
-  --ring: 240 4.9% 83.9%;
+  --ring: 262 83% 58%;
+  --radius: 0.5rem;
+  
+  /* Custom financial theme colors */
+  --neutral-50: 240 10% 3.9%;
+  --neutral-100: 240 3.7% 15.9%;
+  --neutral-500: 240 5% 64.9%;
+  --neutral-800: 240 10% 3.9%;
+  
+  --chart-1: 262 83% 58%; /* Purple */
+  --chart-2: 346 77% 49%; /* Red */
+  --chart-3: 262 83% 58%; /* Purple */
+  --chart-4: 346 77% 49%; /* Red */
+  --chart-5: 262 83% 58%; /* Purple */
 }
 
 @layer base {
@@ -66,25 +46,25 @@
 
   body {
     @apply font-sans antialiased bg-background text-foreground;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Bree Serif', serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-semibold;
+    @apply font-serif;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-xl font-semibold transition-colors shadow-lg;
+    @apply bg-gradient-to-r from-purple-600 to-red-600 text-white hover:from-purple-700 hover:to-red-700 px-6 py-3 rounded-xl font-semibold transition-colors shadow-lg;
   }
 
   .btn-secondary {
-    @apply border border-border text-foreground hover:bg-muted px-6 py-3 rounded-xl font-semibold transition-colors;
+    @apply border border-purple-500/20 text-foreground hover:bg-purple-500/10 px-6 py-3 rounded-xl font-semibold transition-colors;
   }
 
   .gradient-hero {
-    background: linear-gradient(135deg, hsl(var(--primary) / 0.05) 0%, hsl(var(--accent) / 0.05) 100%);
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.1) 0%, hsl(var(--secondary) / 0.1) 100%);
   }
 
   .gradient-card {
@@ -92,7 +72,7 @@
   }
 
   .chart-container {
-    @apply bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20 rounded-xl p-4;
+    @apply bg-gradient-to-br from-purple-950/20 to-red-950/20 rounded-xl p-4;
   }
 }
 
@@ -102,6 +82,6 @@
   }
 
   .bg-financial-gradient {
-    background: linear-gradient(135deg, #1E40AF 0%, #059669 50%, #F59E0B 100%);
+    background: linear-gradient(135deg, #9333EA 0%, #DC2626 50%, #9333EA 100%);
   }
 }

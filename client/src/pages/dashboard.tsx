@@ -14,7 +14,8 @@ import {
   ArrowRight,
   BarChart3,
   MessageSquare,
-  AlertCircle
+  AlertCircle,
+  BookOpen
 } from "lucide-react";
 import PortfolioChart from "@/components/charts/portfolio-chart";
 import AllocationChart from "@/components/charts/allocation-chart";
@@ -53,20 +54,20 @@ export default function Dashboard() {
 
   if (!user) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <Card className="w-full max-w-md mx-4">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800">
+        <Card className="w-full max-w-md mx-4 bg-gray-800 border-gray-700">
           <CardContent className="pt-6 text-center">
             <AlertCircle className="h-12 w-12 text-amber-500 mx-auto mb-4" />
-            <h2 className="text-xl font-semibold text-gray-900 mb-2">Authentication Required</h2>
-            <p className="text-gray-600 mb-6">
+            <h2 className="text-xl font-semibold text-white mb-2">Authentication Required</h2>
+            <p className="text-gray-300 mb-6">
               Please sign in to access your dashboard and portfolio data.
             </p>
             <div className="space-y-3">
               <Link href="/login">
-                <Button className="w-full">Sign In</Button>
+                <Button className="w-full bg-primary hover:bg-primary/90 text-white">Sign In</Button>
               </Link>
               <Link href="/register">
-                <Button variant="outline" className="w-full">Create Account</Button>
+                <Button variant="outline" className="w-full border-gray-700 text-white hover:bg-gray-700">Create Account</Button>
               </Link>
             </div>
           </CardContent>

@@ -60,14 +60,9 @@ export default function Footer() {
                   Education Hub
                 </span>
               </Link>
-              <Link href="/pricing">
+              <Link href="/pricing" >
                 <span className="block text-gray-300 hover:text-white transition-colors">
                   OMEGA AI
-                </span>
-              </Link>
-              <Link href="/pricing">
-                <span className="block text-gray-300 hover:text-white transition-colors">
-                  Pricing
                 </span>
               </Link>
             </div>
@@ -83,16 +78,10 @@ export default function Footer() {
                 </span>
               </Link>
               <a
-                href="#"
+                href="/faq"
                 className="block text-gray-300 hover:text-white transition-colors"
               >
                 Careers
-              </a>
-              <a
-                href="#"
-                className="block text-gray-300 hover:text-white transition-colors"
-              >
-                Press
               </a>
               <a
                 href="mailto:contact@analyticalinvestments.com"
