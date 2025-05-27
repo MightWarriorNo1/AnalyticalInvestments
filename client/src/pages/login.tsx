@@ -48,19 +48,19 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <Card className="w-full max-w-md">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <Card className="w-full max-w-md bg-gray-800 border-gray-700">
         <CardHeader className="space-y-1">
           <div className="flex items-center justify-center mb-4">
             <Brain className="w-8 h-8 text-primary" />
           </div>
-          <CardTitle className="text-2xl font-bold text-center">Welcome back</CardTitle>
+          <CardTitle className="text-2xl font-bold text-center text-white">Welcome back</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid gap-4">
             <Button
               variant="outline"
-              className="w-full"
+              className="w-full border-gray-700 text-white hover:bg-gray-700"
               onClick={() => window.location.href = '/api/auth/google'}
             >
               <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
@@ -85,7 +85,7 @@ export default function Login() {
             </Button>
             <Button
               variant="outline"
-              className="w-full"
+              className="w-full border-gray-700 text-white hover:bg-gray-700"
               onClick={() => window.location.href = '/api/auth/linkedin'}
             >
               <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
@@ -98,33 +98,35 @@ export default function Login() {
             </Button>
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t" />
+                <span className="w-full border-t border-gray-700" />
               </div>
               <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-background px-2 text-muted-foreground">
+                <span className="bg-gray-800 px-2 text-gray-400">
                   Or continue with
                 </span>
               </div>
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email" className="text-white">Email</Label>
                 <Input
                   id="email"
                   type="email"
                   placeholder="name@example.com"
+                  className="bg-gray-700 border-gray-600 text-white placeholder-gray-400"
                   {...register("email")}
                 />
                 {errors.email && (
-                  <p className="text-sm text-red-500">{errors.email.message}</p>
+                  <p className="text-sm text-red-400">{errors.email.message}</p>
                 )}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password" className="text-white">Password</Label>
                 <div className="relative">
                   <Input
                     id="password"
                     type={showPassword ? "text" : "password"}
+                    className="bg-gray-700 border-gray-600 text-white placeholder-gray-400"
                     {...register("password")}
                   />
                   <button
@@ -133,22 +135,22 @@ export default function Login() {
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? (
-                      <EyeOff className="h-4 w-4 text-gray-500" />
+                      <EyeOff className="h-4 w-4 text-gray-400" />
                     ) : (
-                      <Eye className="h-4 w-4 text-gray-500" />
+                      <Eye className="h-4 w-4 text-gray-400" />
                     )}
                   </button>
                 </div>
                 {errors.password && (
-                  <p className="text-sm text-red-500">{errors.password.message}</p>
+                  <p className="text-sm text-red-400">{errors.password.message}</p>
                 )}
               </div>
               {errors.root && (
-                <p className="text-sm text-red-500">{errors.root.message}</p>
+                <p className="text-sm text-red-400">{errors.root.message}</p>
               )}
               <Button
                 type="submit"
-                className="w-full"
+                className="w-full bg-primary hover:bg-primary/90 text-white"
                 disabled={isLoading}
               >
                 {isLoading ? "Signing in..." : "Sign in"}
@@ -156,7 +158,7 @@ export default function Login() {
               </Button>
             </form>
           </div>
-          <div className="mt-4 text-center text-sm">
+          <div className="mt-4 text-center text-sm text-gray-400">
             Don't have an account?{" "}
             <Link href="/register" className="text-primary hover:underline">
               Sign up

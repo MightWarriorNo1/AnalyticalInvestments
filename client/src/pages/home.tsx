@@ -62,7 +62,7 @@ export default function Home() {
                 Unlock the power of advanced analytics and make informed investment decisions with our cutting-edge platform.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link to="/signup" className="btn-primary">
+                <Link to="/register" className="btn-primary">
                   Get Started
                   <ArrowRight className="ml-2 inline-block" size={20} />
                 </Link>
@@ -454,8 +454,9 @@ export default function Home() {
           </div>
 
           {/* Additional Info */}
-          <div className="text-center mt-16 space-y-6">
-            <h3 className="text-2xl font-bold text-white">Questions about our plans?</h3>
+          <div className="text-center mt-16 space-y-8">
+            <h3 className="text-2xl font-bold text-white">Disclosure And Legal Information</h3>
+            {/* Trust Indicators */}
             <div className="flex flex-wrap justify-center gap-8 text-sm text-gray-400">
               <div className="flex items-center space-x-2">
                 <Shield className="w-4 h-4 text-green-400" />
@@ -469,6 +470,40 @@ export default function Home() {
                 <MessageSquare className="w-4 h-4 text-purple-400" />
                 <span>24/7 customer support</span>
               </div>
+            </div>
+            {/* Company Information */}
+            <div className="max-w-3xl mx-auto space-y-4">
+              <p className="text-gray-300">
+                Our Company is an AI-powered analytics tool that helps users explore and understand financial markets. We do not provide personalized investment advice or execute trades, and therefore are not a broker-dealer or investment advisor under U.S. law. Our platform exists purely as a research assistant, giving users access to data and insights without the confusion or cost of traditional financial services. This means we're not required to register with the SEC or follow the strict compliance standards set for those entities. Our mission is to make market analysis accessible, smart, and affordable for everyone.
+              </p>
+              <p className="text-gray-300">
+                Before you use this website, we highly recommend that you read our <Link href="/privacy" className="text-blue-400 hover:text-red-500 active:text-white-500 transition-colors"><strong>Privacy Policy</strong></Link> and <Link href="/terms" className="text-blue-400 hover:text-red-500 active:text-red-500 transition-colors"><strong>Terms of Service</strong></Link>. 
+                You must ensure that you agree and completely understand the information and disclosures we provide before using this website.
+              </p>
+            </div>
+
+            
+
+            {/* Legal Links
+            <div className="flex flex-wrap justify-center gap-6 text-sm">
+              <a href="/privacy" className="text-gray-400 hover:text-white transition-colors">
+                Privacy Policy
+              </a>
+              <a href="/terms" className="text-gray-400 hover:text-white transition-colors">
+                Terms of Service
+              </a>
+              <a href="/compliance" className="text-gray-400 hover:text-white transition-colors">
+                Compliance
+              </a>
+              <a href="/security" className="text-gray-400 hover:text-white transition-colors">
+                Security
+              </a>
+            </div> */}
+
+            {/* Registration Info */}
+            <div className="text-sm text-gray-400">
+              <p>Analytical Investments LLC | Registered in Delaware, USA</p>
+              <p className="mt-1">FINRA Member | SEC Registered Investment Advisor</p>
             </div>
           </div>
         </div>
