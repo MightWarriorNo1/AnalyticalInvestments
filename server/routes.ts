@@ -5,6 +5,8 @@ import OpenAI from "openai";
 import bcrypt from "bcrypt";
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
+import { Strategy as GoogleStrategy } from "passport-google-oauth20";
+import { Strategy as LinkedInStrategy } from "passport-linkedin-oauth2";
 import session from "express-session";
 import { storage } from "./storage";
 import { insertUserSchema, insertCourseSchema } from "@shared/schema";
@@ -28,7 +30,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     secret: process.env.SESSION_SECRET || 'analytical-investments-secret',
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false, maxAge: 24 * 60 * 60 * 1000 } // 24 hours
+    cookie: { secure: process.env.NODE_ENV === 'production', maxAge: 24 * 60 * 60 * 1000 } // 24 hours
   }));
 
   app.use(passport.initialize());
@@ -40,7 +42,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     async (email, password, done) => {
       try {
         const user = await storage.getUserByEmail(email);
-        if (!user) {
+        if (!user || !user.password) {
           return done(null, false, { message: 'Invalid credentials' });
         }
 
@@ -55,6 +57,76 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
     }
   ));
+
+  // Google OAuth Strategy
+  passport.use(new GoogleStrategy({
+    clientID: process.env.GOOGLE_CLIENT_ID || '',
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
+    callbackURL: process.env.NODE_ENV === 'production' 
+      ? 'https://your-domain.com/api/auth/google/callback'
+      : 'http://localhost:5000/api/auth/google/callback',
+    scope: ['profile', 'email']
+  }, async (accessToken, refreshToken, profile, done) => {
+    try {
+      // Check if user exists
+      let user = await storage.getUserByEmail(profile.emails?.[0]?.value || '');
+      
+      if (!user) {
+        // Create new user
+        user = await storage.createUser({
+          username: profile.displayName,
+          email: profile.emails?.[0]?.value || '',
+          provider: 'google',
+          providerId: profile.id,
+          avatar: profile.photos?.[0]?.value,
+          plan: 'free'
+        });
+      } else if (!user.provider) {
+        // Link existing account
+        await storage.updateUserProvider(user.id, 'google', profile.id, profile.photos?.[0]?.value);
+      }
+
+      return done(null, user);
+    } catch (error) {
+      return done(error);
+    }
+  }));
+
+  // LinkedIn OAuth Strategy
+  if (process.env.LINKEDIN_CLIENT_ID && process.env.LINKEDIN_CLIENT_SECRET) {
+    passport.use(new LinkedInStrategy({
+      clientID: process.env.LINKEDIN_CLIENT_ID,
+      clientSecret: process.env.LINKEDIN_CLIENT_SECRET,
+      callbackURL: process.env.NODE_ENV === 'production'
+        ? 'https://your-domain.com/api/auth/linkedin/callback'
+        : 'http://localhost:3000/api/auth/linkedin/callback',
+      scope: ['r_emailaddress', 'r_liteprofile']
+    }, async (accessToken, refreshToken, profile, done) => {
+      try {
+        // Check if user exists
+        let user = await storage.getUserByEmail(profile.emails?.[0]?.value || '');
+        
+        if (!user) {
+          // Create new user
+          user = await storage.createUser({
+            username: profile.displayName,
+            email: profile.emails?.[0]?.value || '',
+            provider: 'linkedin',
+            providerId: profile.id,
+            avatar: profile.photos?.[0]?.value,
+            plan: 'free'
+          });
+        } else if (!user.provider) {
+          // Link existing account
+          await storage.updateUserProvider(user.id, 'linkedin', profile.id, profile.photos?.[0]?.value);
+        }
+
+        return done(null, user);
+      } catch (error) {
+        return done(error);
+      }
+    }));
+  }
 
   passport.serializeUser((user: any, done) => {
     done(null, user.id);
@@ -96,7 +168,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       // Hash password
-      const hashedPassword = await bcrypt.hash(userData.password, 10);
+      const hashedPassword = await bcrypt.hash(userData.password || '', 10);
       
       const user = await storage.createUser({
         ...userData,
@@ -293,6 +365,32 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({ message: error.message });
     }
   });
+
+  // OAuth Routes - Move these before other routes
+  app.get('/api/auth/google', passport.authenticate('google', {
+    scope: ['profile', 'email'],
+    prompt: 'select_account'
+  }));
+
+  app.get('/api/auth/google/callback', 
+    passport.authenticate('google', { 
+      failureRedirect: '/login',
+      successRedirect: '/dashboard'
+    })
+  );
+
+  app.get('/api/auth/linkedin', (req, res, next) => {
+    passport.authenticate('linkedin', { scope: ['r_emailaddress', 'r_liteprofile'] })(req, res, next);
+  });
+
+  app.get('/api/auth/linkedin/callback',
+    (req, res, next) => {
+      passport.authenticate('linkedin', { failureRedirect: '/login' })(req, res, next);
+    },
+    (req, res) => {
+      res.redirect('/dashboard');
+    }
+  );
 
   const httpServer = createServer(app);
   return httpServer;

@@ -65,9 +65,9 @@ export default function Footer() {
                   OMEGA AI
                 </span>
               </Link>
-              <Link href="/pricing">
+              <Link href="/faq">
                 <span className="block text-gray-300 hover:text-white transition-colors">
-                  Pricing
+                  FAQ
                 </span>
               </Link>
             </div>

@@ -20,7 +20,6 @@ import {
   BarChart3,
   MessageCircle,
   BookOpen,
-  DollarSign,
   Crown,
   Sparkles
 } from "lucide-react";
@@ -36,7 +35,6 @@ export default function Navbar() {
     { href: "/dashboard", label: "Dashboard", icon: BarChart3, authRequired: true },
     { href: "/chat", label: "AI Chat", icon: MessageCircle, authRequired: true, omegaOnly: true, badge: "NEW" },
     { href: "/education", label: "Education", icon: BookOpen },
-    { href: "/pricing", label: "Pricing", icon: DollarSign },
     { href: "/about", label: "About", icon: User },
   ];
 

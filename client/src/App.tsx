@@ -10,7 +10,7 @@ import Home from "@/pages/home";
 import About from "@/pages/about";
 import Education from "@/pages/education";
 import Dashboard from "@/pages/dashboard";
-import Pricing from "@/pages/pricing";
+import FAQ from "@/pages/faq";
 import Subscribe from "@/pages/subscribe";
 import Login from "@/pages/login";
 import Register from "@/pages/register";
@@ -26,7 +26,7 @@ function Router() {
       <Route path="/education" component={Education} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/chat" component={Chat} />
-      <Route path="/pricing" component={Pricing} />
+      <Route path="/faq" component={FAQ} />
       <Route path="/subscribe" component={Subscribe} />
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />

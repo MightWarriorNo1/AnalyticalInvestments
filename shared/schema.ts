@@ -7,7 +7,10 @@ export const users = pgTable("users", {
   id: serial("id").primaryKey(),
   username: text("username").notNull().unique(),
   email: text("email").notNull().unique(),
-  password: text("password").notNull(),
+  password: text("password"), // Made optional for OAuth users
+  provider: text("provider"), // "local", "google", or "linkedin"
+  providerId: text("provider_id"), // ID from the OAuth provider
+  avatar: text("avatar"), // Profile picture URL from OAuth provider
   plan: text("plan").notNull().default("free"), // "free" or "omega"
   stripeCustomerId: text("stripe_customer_id"),
   stripeSubscriptionId: text("stripe_subscription_id"),
@@ -79,6 +82,10 @@ export const insertUserSchema = createInsertSchema(users).pick({
   username: true,
   email: true,
   password: true,
+  provider: true,
+  providerId: true,
+  avatar: true,
+  plan: true,
 });
 
 export const insertCourseSchema = createInsertSchema(courses).omit({

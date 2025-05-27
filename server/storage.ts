@@ -10,6 +10,7 @@ export interface IStorage {
   createUser(user: InsertUser): Promise<User>;
   updateUserPlan(id: number, plan: string): Promise<User>;
   updateUserStripeInfo(id: number, stripeCustomerId: string, stripeSubscriptionId: string): Promise<User>;
+  updateUserProvider(id: number, provider: string, providerId: string, avatar?: string): Promise<User>;
   
   // Course management
   getAllCourses(): Promise<Course[]>;
@@ -68,6 +69,15 @@ export class DatabaseStorage implements IStorage {
     const [user] = await db
       .update(users)
       .set({ stripeCustomerId, stripeSubscriptionId })
+      .where(eq(users.id, id))
+      .returning();
+    return user;
+  }
+
+  async updateUserProvider(id: number, provider: string, providerId: string, avatar?: string): Promise<User> {
+    const [user] = await db
+      .update(users)
+      .set({ provider, providerId, avatar })
       .where(eq(users.id, id))
       .returning();
     return user;
